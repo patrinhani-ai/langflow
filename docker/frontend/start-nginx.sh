@@ -13,7 +13,7 @@ if [ -z "$FRONTEND_PORT" ]; then
   FRONTEND_PORT="$2"
 fi
 if [ -z "$FRONTEND_PORT" ]; then
-  FRONTEND_PORT="80"
+  FRONTEND_PORT="8080"
 fi
 if [ -z "$LANGFLOW_MAX_FILE_SIZE_UPLOAD" ]; then
   LANGFLOW_MAX_FILE_SIZE_UPLOAD="1"

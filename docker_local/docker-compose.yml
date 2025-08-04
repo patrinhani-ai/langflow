@@ -1,0 +1,63 @@
+services:
+  langflow-backend:
+    container_name: langflow-backend
+    build:
+      context: ../
+      dockerfile: ./docker_local/backend.Dockerfile
+    env_file:
+      - ./.env
+    environment:
+      - LANGFLOW_CONFIG_DIR=/app/.langflow
+      - LANGFLOW_DATABASE_URL=sqlite:////app/.langflow/langflow.db
+      - LANGFLOW_LOG_FILE=/app/.langflow/logs/langflow.log
+      - BACKEND_URL=http://localhost:7860
+    ports:
+      - "7860:7860"
+    volumes:
+      - ../src/backend:/app/src/backend
+      - ./.langflow:/app/.langflow
+      - ./.files:/app/.files
+    networks:
+      - langflow
+
+  langflow-frontend:
+    container_name: langflow-frontend
+    build:
+      context: ../
+      dockerfile: ./docker/frontend/build_and_push_frontend.Dockerfile
+    depends_on:
+      - langflow-backend
+    env_file:
+      - ./.env
+    environment:
+      - VITE_PROXY_TARGET=http://langflow-backend:7860
+      - BACKEND_URL=http://langflow-backend:7860
+      - FRONTEND_PORT=8080
+    ports:
+      - "8280:8080"
+    volumes:
+      - ./src/frontend/public:/home/node/app/public
+      - ./src/frontend/src:/home/node/app/src
+      - ./src/frontend/package.json:/home/node/app/package.json
+    restart: on-failure
+    networks:
+      - langflow
+
+  # postgres:
+  #   container_name: postgres
+  #   image: pgvector/pgvector:pg16
+  #   environment:
+  #     POSTGRES_USER: langflow
+  #     POSTGRES_PASSWORD: langflow
+  #     POSTGRES_DB: langflow
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - langflow
+
+networks:
+  langflow:
+
+volumes:
+  langflow-data:
+  langflow-postgres:

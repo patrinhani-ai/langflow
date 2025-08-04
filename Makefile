@@ -530,3 +530,5 @@ locust: ## run locust load tests (options: locust_users=10 locust_spawn_rate=1 l
 
 # Include frontend-specific Makefile
 include Makefile.frontend
+
+include Makefile.local
