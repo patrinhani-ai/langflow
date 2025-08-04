@@ -35,6 +35,7 @@ class OllamaEmbeddingsComponent(LCModelComponent):
             display_name="Ollama Base URL",
             value="",
             required=True,
+            real_time_refresh=True,
         ),
     ]
 
