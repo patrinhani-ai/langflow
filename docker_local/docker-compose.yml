@@ -11,7 +11,6 @@ services:
       - LANGFLOW_DATABASE_URL=sqlite:////app/.langflow/langflow.db
       - LANGFLOW_LOG_FILE=/app/.langflow/logs/langflow.log
       - BACKEND_URL=http://localhost:7860
-      - LANGFUSE_HOST=http://host.containers.internal:3000
     ports:
       - "7860:7860"
     volumes:

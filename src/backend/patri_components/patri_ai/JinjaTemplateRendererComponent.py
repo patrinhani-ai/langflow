@@ -1,4 +1,4 @@
-import json  # noqa: D100
+import json  # noqa: D100, N999
 
 from jinja2 import Environment, StrictUndefined, TemplateError, TemplateSyntaxError, UndefinedError
 from langflow.custom.custom_component.component import Component
@@ -6,12 +6,12 @@ from langflow.io import DropdownInput, MessageInput, MultilineInput, Output
 from langflow.schema import Data, Message
 
 
-class JinjaTemplateRenderer(Component):  # noqa: D101
+class JinjaTemplateRendererComponent(Component):  # noqa: D101
     display_name = "Jinja2 Template Renderer"
     description = "Uses Jinja2 to render templates with provided variables. Supports both plain text and JSON outputs."
     documentation: str = "https://docs.langflow.org/components-custom-components"
     icon = "code"
-    name = "JinjaTemplateRenderer"
+    name = "JinjaTemplateRendererComponent"
 
     inputs = [
         MessageInput(
