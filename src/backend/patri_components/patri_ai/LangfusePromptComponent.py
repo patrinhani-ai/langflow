@@ -124,4 +124,17 @@ class LangfusePromptComponent(Component):  # noqa: D101
 
         langchain_prompt = langfuse_prompt.get_langchain_prompt()
 
-        return PromptTemplate.from_template(langchain_prompt, metadata={"langfuse_prompt": langfuse_prompt})
+        system_prompt, user_prompt = None, None
+        system_prompt_template = ""
+        user_prompt_template = ""
+
+        if isinstance(langchain_prompt, list | tuple) and len(langchain_prompt) > 1:
+            system_prompt, user_prompt = langchain_prompt
+            system_prompt_template = system_prompt[1]
+            user_prompt_template = user_prompt[1]
+        elif isinstance(langchain_prompt, str):
+            user_prompt_template = langchain_prompt
+
+        merged_prompt_string = f"{system_prompt_template}\n{user_prompt_template}"
+
+        return PromptTemplate.from_template(merged_prompt_string, metadata={"langfuse_prompt": langfuse_prompt})

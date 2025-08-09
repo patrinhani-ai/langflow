@@ -1,5 +1,10 @@
 DOCKER_PROJECT_NAME=patri-langflow-local
 
+docker_local_up_build:
+	@echo 'Running docker compose up on Local'
+	docker compose -p ${DOCKER_PROJECT_NAME} -f docker_local/docker-compose.yml down || true
+	docker compose -p ${DOCKER_PROJECT_NAME} -f docker_local/docker-compose.yml up --remove-orphans --build
+
 docker_local_up:
 	@echo 'Running docker compose up on Local'
 	docker compose -p ${DOCKER_PROJECT_NAME} -f docker_local/docker-compose.yml down || true
