@@ -1,3 +1,4 @@
-from .jinja_renderer import JinjaTemplateRenderer  # noqa: D104
+from .JinjaTemplateRendererComponent import JinjaTemplateRendererComponent  # noqa: D104
+from .LangfusePromptComponent import LangfusePromptComponent
 
-__all__ = ["JinjaTemplateRenderer"]
+__all__ = ["JinjaTemplateRendererComponent", "LangfusePromptComponent"]
